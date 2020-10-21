@@ -1,52 +1,59 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState } from "react"
 import "./App.css"
 import { useGithubJobsApi } from "./useGithubJobsApi"
 
 export default function App() {
-  const jobs = useGithubJobsApi()
-  const [viewedJobs, setViewedJobs] = useState<any[]>()
-  const jobsRef = useRef<any[]>()
-  const viewedJobsLoadLimit = 12
+  const [pageNumber, setPageNumber] = useState(1)
+  const [titleCompanyOrExpertise, setTitleCompanyOrExpertise] = useState<
+    string
+  >("")
+  const [location, setLocation] = useState<string>("")
+  const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>(false)
+  const jobs = useGithubJobsApi(pageNumber)
 
-  const loadMore = () => {
-    if (jobsRef.current) {
-      const firstTwelveJobs = jobsRef.current.slice(0, viewedJobsLoadLimit)
-      jobsRef.current = jobsRef.current.slice(
-        viewedJobsLoadLimit,
-        jobsRef.current.length
-      )
-
-      if (viewedJobs) {
-        setViewedJobs(viewedJobs.concat(firstTwelveJobs))
-      }
-    }
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    console.log(`${titleCompanyOrExpertise}\n${location}\n${isFullTimeOnly}`)
   }
-
-  useEffect(() => {
-    jobsRef.current = jobs
-  }, [jobs])
-
-  useEffect(() => {
-    if (jobsRef.current) {
-      const firstTwelveJobs = jobsRef.current.slice(0, viewedJobsLoadLimit)
-      jobsRef.current = jobsRef.current.slice(
-        viewedJobsLoadLimit,
-        jobsRef.current.length
-      )
-      setViewedJobs(firstTwelveJobs)
-    }
-  }, [jobs])
 
   return (
     <div className="App">
       <h1>GitHub Jobs</h1>
-      <h2>Showing "{viewedJobs && viewedJobs.length}" jobs</h2>
-      {viewedJobs ? (
-        viewedJobs.map((job) => <p>{job.company}</p>)
+      <form action="" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Filter by title, companies, expertise..."
+          style={{ width: 250 }}
+          onChange={(e) => setTitleCompanyOrExpertise(e.target.value)}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Filter by location..."
+          style={{ width: 250 }}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <br />
+        Full Time Only
+        <input
+          type="checkbox"
+          checked={isFullTimeOnly}
+          onClick={() => setIsFullTimeOnly(isFullTimeOnly ? false : true)}
+        />
+        <br />
+        <button>Search</button>
+      </form>
+      <h2>Showing "{jobs && jobs.length}" jobs</h2>
+      {jobs ? (
+        jobs.map((job, index) => (
+          <p>
+            {index}: {job.company}
+          </p>
+        ))
       ) : (
         <h3>Loading...</h3>
       )}
-      <button onClick={loadMore}>Load more</button>
+      <button onClick={() => setPageNumber(pageNumber + 1)}>Load more</button>
     </div>
   )
 }
