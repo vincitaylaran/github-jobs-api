@@ -1,9 +1,13 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 
 interface Criteria {
   description?: string
   location?: string
   isFullTimeOnly?: boolean
+}
+
+interface Props {
+  page?: number
 }
 
 export function useGithubJobsApi(page: number) {
@@ -21,32 +25,26 @@ export function useGithubJobsApi(page: number) {
     const request = await fetch(updatedEndpoint)
     const response = await request.json()
     const data = response
+    console.log(updatedEndpoint)
+
     console.log(data)
-
-    // if (description)
-
-    // const filteredJobs = jobs.filter((job) => {
-    //   return keywords.every(
-    //     (word) =>
-    //       job.type === word || job.location.toLowerCase() === word.toLowerCase()
-    //   )
-    // })
   }
 
-  const fetchData = useCallback(async () => {
-    const request = await fetch(endpoint)
-    const response = await request.json()
-    const data = response
+  function fetchData() {
+    fetch(endpoint)
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        const data = res
+        if (data.length > 0) {
+          setJobs(jobs.concat(data))
+          console.log(data)
+        }
+      })
+  }
 
-    if (data.length > 0) {
-      setJobs(jobs.concat(data))
-      console.log(data)
-    }
-  }, [page])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  useEffect(fetchData, [page])
 
   return { jobs, filter }
 }
