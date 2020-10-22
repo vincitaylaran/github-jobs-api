@@ -6,10 +6,6 @@ interface Criteria {
   isFullTimeOnly?: boolean
 }
 
-interface Props {
-  page?: number
-}
-
 export function useGithubJobsApi(page: number) {
   const [jobs, setJobs] = useState<any[]>([])
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=${page}`
