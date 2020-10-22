@@ -14,7 +14,7 @@ export function useGithubJobsApi(page: number) {
   const [jobs, setJobs] = useState<any[]>([])
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=${page}`
 
-  const filter = async (criteria: Criteria) => {
+  const filter = (criteria: Criteria) => {
     const { description, location, isFullTimeOnly } = criteria
 
     let updatedEndpoint = `${endpoint}`
@@ -22,12 +22,14 @@ export function useGithubJobsApi(page: number) {
     if (location) updatedEndpoint += `&location=${location}`
     if (isFullTimeOnly) updatedEndpoint += `&full_time=${isFullTimeOnly}`
 
-    const request = await fetch(updatedEndpoint)
-    const response = await request.json()
-    const data = response
-    console.log(updatedEndpoint)
-
-    console.log(data)
+    fetch(updatedEndpoint)
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        const data = res
+        console.log(data)
+      })
   }
 
   function fetchData() {
