@@ -3,15 +3,13 @@ import "./App.css"
 import { useGithubJobsApi } from "./useGithubJobsApi"
 
 export default function App() {
-  const [pageNumber, setPageNumber] = useState(1)
   const [description, setDescription] = useState<string>()
   const [location, setLocation] = useState<string>()
   const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>()
-  const { jobs, filter } = useGithubJobsApi(pageNumber)
+  const { jobs, filter, loadMore } = useGithubJobsApi()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    setPageNumber(1)
     filter({ description, location, isFullTimeOnly })
   }
 
@@ -55,7 +53,7 @@ export default function App() {
       ) : (
         <h3>Loading...</h3>
       )}
-      <button onClick={() => setPageNumber(pageNumber + 1)}>Load more</button>
+      <button onClick={loadMore}>Load more</button>
     </div>
   )
 }

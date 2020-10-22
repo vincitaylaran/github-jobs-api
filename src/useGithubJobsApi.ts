@@ -6,8 +6,9 @@ interface Criteria {
   isFullTimeOnly?: boolean
 }
 
-export function useGithubJobsApi(page: number) {
+export function useGithubJobsApi() {
   const [jobs, setJobs] = useState<any[]>([])
+  const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?page=${page}`
 
   const filter = (criteria: Criteria) => {
@@ -28,7 +29,7 @@ export function useGithubJobsApi(page: number) {
       })
   }
 
-  function fetchData() {
+  const fetchData = () => {
     fetch(endpoint)
       .then((req) => {
         return req.json()
@@ -42,7 +43,11 @@ export function useGithubJobsApi(page: number) {
       })
   }
 
+  const loadMore = () => {
+    setPage(page + 1)
+  }
+
   useEffect(fetchData, [page])
 
-  return { jobs, filter }
+  return { jobs, filter, loadMore }
 }
