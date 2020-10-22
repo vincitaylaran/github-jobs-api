@@ -4,16 +4,15 @@ import { useGithubJobsApi } from "./useGithubJobsApi"
 
 export default function App() {
   const [pageNumber, setPageNumber] = useState(1)
-  const [titleCompanyOrExpertise, setTitleCompanyOrExpertise] = useState<
-    string
-  >("")
-  const [location, setLocation] = useState<string>("")
-  const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>(false)
-  const jobs = useGithubJobsApi(pageNumber)
+  const [description, setDescription] = useState<string>()
+  const [location, setLocation] = useState<string>()
+  const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>()
+  const { jobs, filter } = useGithubJobsApi(pageNumber)
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log(`${titleCompanyOrExpertise}\n${location}\n${isFullTimeOnly}`)
+    setPageNumber(1)
+    filter({ description, location, isFullTimeOnly })
   }
 
   return (
@@ -24,13 +23,14 @@ export default function App() {
           type="text"
           placeholder="Filter by title, companies, expertise..."
           style={{ width: 250 }}
-          onChange={(e) => setTitleCompanyOrExpertise(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <br />
         <input
           type="text"
           placeholder="Filter by location..."
           style={{ width: 250 }}
+          value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
         <br />
@@ -47,7 +47,9 @@ export default function App() {
       {jobs ? (
         jobs.map((job, index) => (
           <p>
-            {index}: {job.company}
+            {index}: {job.company} <br />
+            type: {job.type} <br />
+            location: {job.location}
           </p>
         ))
       ) : (
