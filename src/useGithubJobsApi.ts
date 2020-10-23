@@ -8,6 +8,7 @@ interface Query {
 }
 
 export function useGithubJobsApi() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [jobs, setJobs] = useState<any[]>([])
   const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
@@ -24,6 +25,8 @@ export function useGithubJobsApi() {
 
       endpointCopy += `page=${pageNumber}&`
 
+      setIsLoading(true)
+
       fetch(endpointCopy)
         .then((req) => {
           return req.json()
@@ -31,10 +34,13 @@ export function useGithubJobsApi() {
         .then((res) => {
           console.log(res)
           console.log(endpointCopy)
+          setIsLoading(false)
           setJobs(res)
         })
     } else {
       endpointCopy = `${endpointCopy}page=${page}`
+      setIsLoading(true)
+
       fetch(endpointCopy)
         .then((req) => {
           return req.json()
@@ -42,6 +48,7 @@ export function useGithubJobsApi() {
         .then((res) => {
           console.log(res)
           console.log(endpointCopy)
+          setIsLoading(false)
           setJobs(jobs.concat(res))
         })
     }
@@ -53,5 +60,5 @@ export function useGithubJobsApi() {
 
   useEffect(fetchData, [page])
 
-  return { jobs, fetchData, loadMore }
+  return { jobs, fetchData, loadMore, isLoading }
 }
