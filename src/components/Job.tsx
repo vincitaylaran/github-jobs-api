@@ -1,6 +1,6 @@
 import React from "react"
 
-interface Props {
+export interface Props {
   company: string
   company_logo: string
   company_url: string
@@ -15,8 +15,6 @@ interface Props {
 }
 
 export const Job: React.FC<Props> = ({ ...job }) => {
-  console.log(job)
-
   const { id, company, type, location } = job
 
   return (
