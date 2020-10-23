@@ -10,7 +10,11 @@ export default function App() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    filter({ description, location, isFullTimeOnly })
+    filter({
+      description,
+      location,
+      isFullTimeOnly,
+    })
   }
 
   return (
