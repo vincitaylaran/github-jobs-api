@@ -6,14 +6,15 @@ export default function App() {
   const [description, setDescription] = useState<string>()
   const [location, setLocation] = useState<string>()
   const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>()
-  const { jobs, filter, loadMore } = useGithubJobsApi()
+  const { jobs, fetchData, loadMore } = useGithubJobsApi()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    filter({
+    fetchData({
       description,
       location,
       isFullTimeOnly,
+      pageNumber: 1,
     })
   }
 
