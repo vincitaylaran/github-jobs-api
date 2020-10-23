@@ -41,10 +41,12 @@ export default function App() {
         <br />
         <button>Search</button>
       </form>
+      <button onClick={loadMore}>Load more</button>
+
       <h2>Showing "{jobs && jobs.length}" jobs</h2>
       {jobs ? (
         jobs.map((job, index) => (
-          <p>
+          <p key={job.id}>
             {index}: {job.company} <br />
             type: {job.type} <br />
             location: {job.location}
