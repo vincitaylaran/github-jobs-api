@@ -51,7 +51,11 @@ export default function App() {
       <h2>Showing "{jobs && jobs.length}" jobs</h2>
       {jobs ? (
         jobs.map((job, index) => (
-          <p key={job.id}>
+          <p
+            key={job.id}
+            style={{ border: "1px solid", cursor: "pointer" }}
+            onClick={() => console.log("hello")}
+          >
             {index}: {job.company} <br />
             type: {job.type} <br />
             location: {job.location}
