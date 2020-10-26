@@ -1,16 +1,11 @@
 import React, { useState } from "react"
 
 interface Props {
-  onSearch?: (
-    pageNumber?: number,
+  onSearch: (
     description?: string,
     location?: string,
     isFullTimeOnly?: boolean
   ) => void
-  // description?: string
-  // location?: string
-  // isFullTimeOnly?: string | boolean
-  // pageNumber?: number
 }
 
 interface Query {
@@ -27,7 +22,7 @@ export const Filters: React.FC<Props> = ({ onSearch }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    // onSearch(1, description, location, isFullTimeOnly)
+    onSearch(description, location, isFullTimeOnly)
   }
 
   return (

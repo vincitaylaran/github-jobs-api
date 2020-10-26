@@ -35,6 +35,26 @@ export function useGithubJobsApi() {
       })
   }
 
+  const findJobs = (
+    description?: string,
+    location?: string,
+    isFullTimeOnly?: boolean
+  ) => {
+    let endpointCopy = endpoint
+    if (description) endpointCopy += `description=${description}&`
+    if (location) endpointCopy += `location=${location}&`
+    if (isFullTimeOnly)
+      endpointCopy += `full_time=${isFullTimeOnly ? "true" : "false"}&`
+
+    fetch(endpointCopy)
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        setJobs(res)
+      })
+  }
+
   const loadMore = () => {
     const nextPage = page + 1
     setPage(nextPage)
@@ -53,5 +73,5 @@ export function useGithubJobsApi() {
 
   useEffect(fetchData, [])
 
-  return { jobs, fetchData, loadMore }
+  return { jobs, loadMore, findJobs }
 }
