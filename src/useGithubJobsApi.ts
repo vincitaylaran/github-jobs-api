@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Props as IJob } from "./components/Job"
 
 interface Query {
   description?: string
@@ -8,57 +9,49 @@ interface Query {
 }
 
 export function useGithubJobsApi() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [jobs, setJobs] = useState<any[]>([])
+  const [jobs, setJobs] = useState<IJob[]>([])
+  console.log("useGithubJobsApi -> jobs", jobs)
   const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
 
-  const fetchData = (query?: Query) => {
+  const fetchData = (pageNumber?: number) => {
     let endpointCopy = endpoint
+    console.log("useGithubJobsApi -> endpointCopy", endpointCopy)
 
-    if (query) {
-      const { description, location, isFullTimeOnly, pageNumber } = query
+    // if (description) endpointCopy += `description=${description}&`
+    // if (location) endpointCopy += `location=${location}&`
+    // if (isFullTimeOnly) endpointCopy += `full_time=${description}&`
+    if (pageNumber) setPage(pageNumber)
 
-      if (description) endpointCopy += `description=${description}&`
-      if (location) endpointCopy += `location=${location}&`
-      if (isFullTimeOnly) endpointCopy += `full_time=${description}&`
+    endpointCopy += `page=${page}&`
 
-      endpointCopy += `page=${pageNumber}&`
-
-      setIsLoading(true)
-
-      fetch(endpointCopy)
-        .then((req) => {
-          return req.json()
-        })
-        .then((res) => {
-          console.log(res)
-          console.log(endpointCopy)
-          setIsLoading(false)
-          setJobs(res)
-        })
-    } else {
-      endpointCopy = `${endpointCopy}page=${page}`
-      setIsLoading(true)
-
-      fetch(endpointCopy)
-        .then((req) => {
-          return req.json()
-        })
-        .then((res) => {
-          console.log(res)
-          console.log(endpointCopy)
-          setIsLoading(false)
-          setJobs(jobs.concat(res))
-        })
-    }
+    fetch(endpointCopy)
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        setJobs(res)
+        return res
+      })
   }
 
   const loadMore = () => {
-    setPage(page + 1)
+    const nextPage = page + 1
+    setPage(nextPage)
+    const endpointWithPage = `${endpoint}page=${nextPage}`
+
+    fetch(endpointWithPage)
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        if (res.length > 0) {
+          setJobs(jobs.concat(res))
+        }
+      })
   }
 
-  useEffect(fetchData, [page])
+  useEffect(fetchData, [])
 
-  return { jobs, fetchData, loadMore, isLoading }
+  return { jobs, fetchData, loadMore }
 }
