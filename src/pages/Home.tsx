@@ -5,10 +5,8 @@ import { Jobs } from "../components/Jobs"
 import { Job, Props as IJob } from "../components/Job"
 import { useGithubJobsApi } from "../useGithubJobsApi"
 
-interface Props {}
-
-export const Home = (props: Props) => {
-  const { jobs, fetchData, loadMore, isLoading } = useGithubJobsApi()
+export const Home = () => {
+  const { jobs, fetchData, loadMore } = useGithubJobsApi()
 
   return (
     <div className="App">
