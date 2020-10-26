@@ -1,4 +1,5 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 
 export interface Props {
   company: string
@@ -16,12 +17,13 @@ export interface Props {
 
 export const Job: React.FC<Props> = ({ ...job }) => {
   const { id, company, type, location } = job
+  const history = useHistory()
 
   return (
     <p
       key={id}
       style={{ border: "1px solid", cursor: "pointer" }}
-      onClick={() => console.log("hello")}
+      onClick={() => history.push(`/job/${id}`)}
     >
       {company} <br />
       type: {type} <br />
