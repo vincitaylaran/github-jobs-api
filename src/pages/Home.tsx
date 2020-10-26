@@ -5,13 +5,18 @@ import { Jobs } from "../components/Jobs"
 import { Job, Props as IJob } from "../components/Job"
 import { useGithubJobsApi } from "../useGithubJobsApi"
 
-export const Home = () => {
-  const { jobs, fetchData, loadMore } = useGithubJobsApi()
+interface Props {
+  jobs: IJob[]
+  loadMore: () => void
+}
+
+export const Home: React.FC<Props> = ({ jobs, loadMore }) => {
+  // const { jobs, fetchData, loadMore } = useGithubJobsApi()
 
   return (
     <div className="App">
       <h1>GitHub Jobs</h1>
-      <Filters onSearch={fetchData} />
+      <Filters />
       <LoadButton onClick={loadMore}>Load more</LoadButton>
       <h2>Showing "{jobs && jobs.length}" jobs</h2>
       <Jobs>

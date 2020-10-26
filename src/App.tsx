@@ -5,15 +5,19 @@ import { JobDescription } from "./pages/JobDescription"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
+import { useGithubJobsApi } from "./useGithubJobsApi"
+
 export default function App() {
+  const { jobs, loadMore } = useGithubJobsApi()
+
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home jobs={jobs} loadMore={loadMore} />
         </Route>
         <Route exact path="/job/:id">
-          <JobDescription />
+          <JobDescription jobs={jobs} />
         </Route>
       </Switch>
     </Router>
