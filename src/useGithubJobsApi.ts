@@ -10,17 +10,12 @@ interface Query {
 
 export function useGithubJobsApi() {
   const [jobs, setJobs] = useState<IJob[]>([])
-  console.log("useGithubJobsApi -> jobs", jobs)
   const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
 
   const fetchData = (pageNumber?: number) => {
     let endpointCopy = endpoint
-    console.log("useGithubJobsApi -> endpointCopy", endpointCopy)
 
-    // if (description) endpointCopy += `description=${description}&`
-    // if (location) endpointCopy += `location=${location}&`
-    // if (isFullTimeOnly) endpointCopy += `full_time=${description}&`
     if (pageNumber) setPage(pageNumber)
 
     endpointCopy += `page=${page}&`
