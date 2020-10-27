@@ -51,19 +51,21 @@ export function useGithubJobsApi() {
   }
 
   const loadMore = () => {
-    const nextPage = page + 1
-    setPage(nextPage)
-    const endpointWithPage = `${endpoint}page=${nextPage}`
+    if (jobs.length >= 50) {
+      const nextPage = page + 1
+      setPage(nextPage)
+      const endpointWithPage = `${endpoint}page=${nextPage}`
 
-    fetch(endpointWithPage)
-      .then((req) => {
-        return req.json()
-      })
-      .then((res) => {
-        if (res.length > 0) {
-          setJobs(jobs.concat(res))
-        }
-      })
+      fetch(endpointWithPage)
+        .then((req) => {
+          return req.json()
+        })
+        .then((res) => {
+          if (res.length > 0) {
+            setJobs(jobs.concat(res))
+          }
+        })
+    }
   }
 
   useEffect(fetchData, [])
