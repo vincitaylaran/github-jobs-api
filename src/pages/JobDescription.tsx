@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Props as IJob } from "../components/Job"
+import parse from "html-react-parser"
 
 interface Params {
   id: string
@@ -19,14 +20,17 @@ export const JobDescription: React.FC<Props> = ({ jobs }) => {
      */
 
   const params = useParams<Params>()
-  const [job] = jobs.filter((job) => job.id === params.id)
-  console.log("jobs", jobs)
+  const [job, setJob] = useState<IJob>()
 
-  console.log("JobDescription -> params", params)
+  useEffect(() => {
+    const [matchedJob] = jobs.filter((job) => job.id === params.id)
+    setJob(matchedJob)
+  }, [jobs, params.id])
 
   return (
     <div>
       <h1>{jobs && job ? job.company : "Loading..."}</h1>
+      <div>{jobs && job ? parse(job.description) : "Loading..."}</div>
     </div>
   )
 }
