@@ -17,7 +17,7 @@ export default function App() {
           <Home jobs={jobs} loadMore={loadMore} findJobs={findJobs} />
         </Route>
         <Route exact path="/job/:id">
-          <JobDescription jobs={jobs} />
+          <JobDescription />
         </Route>
       </Switch>
     </Router>
