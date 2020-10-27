@@ -9,6 +9,7 @@ interface Query {
 }
 
 export function useGithubJobsApi() {
+  // TODO: create a loading state to track whether if a request is being made.
   const [jobs, setJobs] = useState<IJob[]>([])
   const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
@@ -28,6 +29,19 @@ export function useGithubJobsApi() {
         setJobs(res)
         return res
       })
+  }
+
+  // Since we can't make queries for jobs based on their ID, we have to search through each page until we find the job with a matching ID.
+  // Not being able to make a query for IDs is the limitation of the API.
+  const findJob = (id: string) => {
+    // make a request using endpoint
+    // check if the response is an array
+    // check if the array's length is greater than 0
+    // iterate through the array
+    // if the element's id matches to the argument id
+    //    return the element
+    // otherwise
+    //    check the next page
   }
 
   const findJobs = (
