@@ -23,7 +23,10 @@ export const Job: React.FC<Props> = ({ ...job }) => {
     <p
       key={id}
       style={{ border: "1px solid", cursor: "pointer" }}
-      onClick={() => history.push(`/job/${id}`)} // TODO: pass the page number the job was found in too.
+      onClick={() => {
+        history.push(`/job/${id}`)
+        localStorage.setItem("job", JSON.stringify(job))
+      }}
     >
       {company} <br />
       type: {type} <br />
