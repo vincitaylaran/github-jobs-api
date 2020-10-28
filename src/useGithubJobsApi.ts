@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Props as IJob } from "./components/Job"
 
+// https://jobs.github.com/api
+
 interface Query {
   description?: string
   location?: string
@@ -9,24 +11,29 @@ interface Query {
 }
 
 export function useGithubJobsApi() {
-  // TODO: create a loading state to track whether if a request is being made.
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [jobs, setJobs] = useState<IJob[]>([])
   const [page, setPage] = useState<number>(1)
   const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
 
   const fetchData = (pageNumber?: number) => {
+    console.log("fetching data...")
+
     let endpointCopy = endpoint
 
     if (pageNumber) setPage(pageNumber)
 
     endpointCopy += `page=${page}&`
-
+    setIsLoading(true)
     fetch(endpointCopy)
       .then((req) => {
         return req.json()
       })
       .then((res) => {
         setJobs(res)
+        setIsLoading(false)
+        console.log("data fetched!")
+
         return res
       })
   }
@@ -42,12 +49,15 @@ export function useGithubJobsApi() {
     if (isFullTimeOnly)
       endpointCopy += `full_time=${isFullTimeOnly ? "true" : "false"}&`
 
+    setIsLoading(true)
+
     fetch(endpointCopy)
       .then((req) => {
         return req.json()
       })
       .then((res) => {
         setJobs(res)
+        setIsLoading(false)
       })
   }
 
@@ -56,7 +66,7 @@ export function useGithubJobsApi() {
       const nextPage = page + 1
       setPage(nextPage)
       const endpointWithPage = `${endpoint}page=${nextPage}`
-
+      setIsLoading(true)
       fetch(endpointWithPage)
         .then((req) => {
           return req.json()
@@ -65,11 +75,12 @@ export function useGithubJobsApi() {
           if (res.length > 0) {
             setJobs(jobs.concat(res))
           }
+          setIsLoading(false)
         })
     }
   }
 
   useEffect(fetchData, [])
 
-  return { jobs, loadMore, findJobs }
+  return { jobs, loadMore, findJobs, isLoading }
 }
