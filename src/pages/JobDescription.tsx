@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Props as IJob } from "../components/Job"
 import parse from "html-react-parser"
+import { ThemeContext } from "../hooks/useDarkTheme"
 
 export const JobDescription: React.FC = () => {
   /**
@@ -10,6 +11,8 @@ export const JobDescription: React.FC = () => {
      */
 
   const [job, setJob] = useState<IJob>()
+  const theme = useContext(ThemeContext)
+  console.log("JobDescription:React.FC -> theme", theme)
 
   useEffect(() => {
     const jobInLocalStorage = localStorage.getItem("job")

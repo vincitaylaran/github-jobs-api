@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Filters } from "../components/Filters"
 import { LoadButton } from "../components/LoadButton"
 import { Jobs } from "../components/Jobs"
 import { Job, Props as IJob } from "../components/Job"
+import { ThemeContext } from "../hooks/useDarkTheme"
 
 interface Props {
   jobs: IJob[]
@@ -17,7 +18,9 @@ export const Home: React.FC<Props> = ({
   findJobs,
   isLoading,
 }) => {
-  console.log("isLoading", isLoading)
+  const theme = useContext(ThemeContext)
+  console.log("theme", theme)
+
   return (
     <div className="App">
       <h1>GitHub Jobs</h1>
