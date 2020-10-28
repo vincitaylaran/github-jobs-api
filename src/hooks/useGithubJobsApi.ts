@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Props as IJob } from "./components/Job"
+import { Props as IJob } from "../components/Job"
 
 // https://jobs.github.com/api
 
