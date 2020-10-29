@@ -10,8 +10,6 @@ import { ThemeContext, useDarkTheme } from "./hooks/useDarkTheme"
 
 import { ThemeButton } from "./components/ThemeButton"
 
-// TODO: remove 'job' from local storage when user exits app.
-
 export default function App() {
   const { jobs, loadMore, findJobs, isLoading } = useGithubJobsApi()
   const { theme, switchTheme } = useDarkTheme()

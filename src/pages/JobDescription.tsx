@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useContext, useCallback } from "react"
-import { Props as IJob } from "../components/Job"
+import React, { useEffect, useContext, useCallback } from "react"
 import parse from "html-react-parser"
 import { ThemeContext } from "../hooks/useDarkTheme"
-import {useGithubJobsApi} from '../hooks/useGithubJobsApi'
-import {useParams} from 'react-router-dom'
+import { useGithubJobsApi } from "../hooks/useGithubJobsApi"
+import { useParams } from "react-router-dom"
 
 interface Params {
-  id:string
+  id: string
 }
 
 export const JobDescription: React.FC = () => {
-
   const theme = useContext(ThemeContext)
   const params = useParams<Params>()
-  const {findJob, job} = useGithubJobsApi()
+  const { findJob, job, isLoading } = useGithubJobsApi()
   console.log("JobDescription:React.FC -> theme", theme)
 
   const memoizedCallback = useCallback(() => {
@@ -24,8 +22,15 @@ export const JobDescription: React.FC = () => {
 
   return (
     <div>
-      <h1>{job ? job.company : "Loading..."}</h1>
-      <div>{job ? parse(job.description) : "Loading..."}</div>
+      {!isLoading && job ? (
+        <>
+          <h1>{job.company}</h1> <div>{parse(job.description)}</div>{" "}
+        </>
+      ) : (
+        <div>Loading...</div>
+      )}
+      {/* <h1>{job ? job.company : "Loading..."}</h1>
+      <div>{job ? parse(job.description) : "Loading..."}</div> */}
     </div>
   )
 }

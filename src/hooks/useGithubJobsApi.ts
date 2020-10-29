@@ -20,16 +20,17 @@ export function useGithubJobsApi() {
   const findJob = (id: string) => {
     const endpointWithQuery = `${endpoint}/${id}.json`
     console.log("useGithubJobsApi -> endpointWithQuery", endpointWithQuery)
-    console.log('fetching job...');
-    
+    console.log("fetching job...")
+    setIsLoading(true)
     fetch(endpointWithQuery)
-    .then(req => {
-      return req.json()
-    })
-    .then(res => {
-      console.log("useGithubJobsApi -> res", res)
-      setJob(res)
-    })
+      .then((req) => {
+        return req.json()
+      })
+      .then((res) => {
+        console.log("useGithubJobsApi -> res", res)
+        setIsLoading(false)
+        setJob(res)
+      })
   }
 
   const fetchData = (pageNumber?: number) => {
