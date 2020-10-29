@@ -25,7 +25,6 @@ export const Job: React.FC<Props> = ({ ...job }) => {
       style={{ border: "1px solid", cursor: "pointer" }}
       onClick={() => {
         history.push(`/job/${id}`)
-        localStorage.setItem("job", JSON.stringify(job))
       }}
     >
       {company} <br />

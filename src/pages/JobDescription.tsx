@@ -1,25 +1,26 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useCallback } from "react"
 import { Props as IJob } from "../components/Job"
 import parse from "html-react-parser"
 import { ThemeContext } from "../hooks/useDarkTheme"
+import {useGithubJobsApi} from '../hooks/useGithubJobsApi'
+import {useParams} from 'react-router-dom'
+
+interface Params {
+  id:string
+}
 
 export const JobDescription: React.FC = () => {
-  /**
-     Since the API can't let me make a query based on job ID, I have make a call to the useGithubJobsApi hook
-     from App and pass the jobs array down to this component. Not ideal, but it's the only solution I can think of 
-     at the moment.
-     */
 
-  const [job, setJob] = useState<IJob>()
   const theme = useContext(ThemeContext)
+  const params = useParams<Params>()
+  const {findJob, job} = useGithubJobsApi()
   console.log("JobDescription:React.FC -> theme", theme)
 
-  useEffect(() => {
-    const jobInLocalStorage = localStorage.getItem("job")
-    if (jobInLocalStorage) {
-      setJob(JSON.parse(jobInLocalStorage))
-    }
-  }, [])
+  const memoizedCallback = useCallback(() => {
+    findJob(params.id)
+  }, [findJob, params.id])
+
+  useEffect(memoizedCallback, [])
 
   return (
     <div>
