@@ -13,8 +13,24 @@ interface Query {
 export function useGithubJobsApi() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [jobs, setJobs] = useState<IJob[]>([])
+  const [job, setJob] = useState<IJob>()
   const [page, setPage] = useState<number>(1)
-  const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?`
+  const endpoint = `https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions`
+
+  const findJob = (id: string) => {
+    const endpointWithQuery = `${endpoint}/${id}.json`
+    console.log("useGithubJobsApi -> endpointWithQuery", endpointWithQuery)
+    console.log('fetching job...');
+    
+    fetch(endpointWithQuery)
+    .then(req => {
+      return req.json()
+    })
+    .then(res => {
+      console.log("useGithubJobsApi -> res", res)
+      setJob(res)
+    })
+  }
 
   const fetchData = (pageNumber?: number) => {
     console.log("fetching data...")
@@ -23,7 +39,7 @@ export function useGithubJobsApi() {
 
     if (pageNumber) setPage(pageNumber)
 
-    endpointCopy += `page=${page}&`
+    endpointCopy += `.json?page=${page}&`
     setIsLoading(true)
     fetch(endpointCopy)
       .then((req) => {
@@ -43,7 +59,7 @@ export function useGithubJobsApi() {
     location?: string,
     isFullTimeOnly?: boolean
   ) => {
-    let endpointCopy = endpoint
+    let endpointCopy = `${endpoint}.json?`
     if (description) endpointCopy += `description=${description}&`
     if (location) endpointCopy += `location=${location}&`
     if (isFullTimeOnly)
@@ -65,7 +81,7 @@ export function useGithubJobsApi() {
     if (jobs.length >= 50) {
       const nextPage = page + 1
       setPage(nextPage)
-      const endpointWithPage = `${endpoint}page=${nextPage}`
+      const endpointWithPage = `${endpoint}.json?page=${nextPage}`
       setIsLoading(true)
       fetch(endpointWithPage)
         .then((req) => {
@@ -82,5 +98,5 @@ export function useGithubJobsApi() {
 
   useEffect(fetchData, [])
 
-  return { jobs, loadMore, findJobs, isLoading }
+  return { jobs, loadMore, findJobs, isLoading, findJob, job }
 }
