@@ -4,21 +4,11 @@ import { LoadButton } from "../components/LoadButton"
 import { Jobs } from "../components/Jobs"
 import { Job, Props as IJob } from "../components/Job"
 import { ThemeContext } from "../hooks/useDarkTheme"
+import { useGithubJobsApi } from "../hooks/useGithubJobsApi"
 
-interface Props {
-  jobs: IJob[]
-  isLoading: boolean
-  loadMore: () => void
-  findJobs: () => void
-}
-
-export const Home: React.FC<Props> = ({
-  jobs,
-  loadMore,
-  findJobs,
-  isLoading,
-}) => {
+export const Home = () => {
   const theme = useContext(ThemeContext)
+  const { findJobs, loadMore, isLoading, jobs } = useGithubJobsApi()
   console.log("theme", theme)
 
   return (
