@@ -5,13 +5,11 @@ import { JobDescription } from "./pages/JobDescription"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import { useGithubJobsApi } from "./hooks/useGithubJobsApi"
 import { ThemeContext, useDarkTheme } from "./hooks/useDarkTheme"
 
 import { ThemeButton } from "./components/ThemeButton"
 
 export default function App() {
-  const { jobs, loadMore, findJobs, isLoading } = useGithubJobsApi()
   const { theme, switchTheme } = useDarkTheme()
 
   return (
@@ -20,12 +18,7 @@ export default function App() {
       <Switch>
         <ThemeContext.Provider value={theme}>
           <Route exact path="/">
-            <Home
-              jobs={jobs}
-              loadMore={loadMore}
-              findJobs={findJobs}
-              isLoading={isLoading}
-            />
+            <Home />
           </Route>
           <Route exact path="/job/:id">
             <JobDescription />
