@@ -12,7 +12,10 @@ export const Home = () => {
   console.log("theme", theme)
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ backgroundColor: theme === "dark" ? "#121721" : "#ffffff" }}
+    >
       <h1>GitHub Jobs</h1>
       <Filters onSearch={findJobs} />
       <LoadButton onClick={loadMore} isLoading={isLoading}>

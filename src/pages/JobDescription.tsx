@@ -24,7 +24,14 @@ export const JobDescription: React.FC = () => {
     <div>
       {!isLoading && job ? (
         <>
-          <h1>{job.company}</h1> <div>{parse(job.description)}</div>{" "}
+          <h1>{job.company}</h1>{" "}
+          <div
+            style={{
+              backgroundColor: theme === "dark" ? "#121721" : "#ffffff",
+            }}
+          >
+            {parse(job.description)}
+          </div>{" "}
         </>
       ) : (
         <div>Loading...</div>
