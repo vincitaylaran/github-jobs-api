@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useCallback } from "react"
 import parse from "html-react-parser"
-import { ThemeContext } from "../App"
-import { useGithubJobsApi } from "../hooks/useGithubJobsApi"
+import { ThemeContext } from "App"
+import { useGithubJobsApi } from "hooks/useGithubJobsApi"
 import { useParams } from "react-router-dom"
 
 interface Params {

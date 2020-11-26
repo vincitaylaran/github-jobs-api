@@ -1,13 +1,13 @@
 import React, { createContext } from "react"
-import "./App.css"
-import { Home } from "./pages/Home"
-import { JobDescription } from "./pages/JobDescription"
+import "App.css"
+import { Home } from "pages/Home"
+import { JobDescription } from "pages/JobDescription"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import { useDarkTheme } from "./hooks/useDarkTheme"
+import { useDarkTheme } from "hooks/useDarkTheme"
 
-import { ThemeButton } from "./components/ThemeButton"
+import { ThemeButton } from "components/ThemeButton"
 
 export const ThemeContext = createContext("light")
 

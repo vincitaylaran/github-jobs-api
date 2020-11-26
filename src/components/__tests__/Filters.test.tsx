@@ -1,7 +1,7 @@
 import React from "react"
 import { shallow } from "enzyme"
-import { Filters } from "../Filters"
-import { FilterButton } from "../FilterButton"
+import { Filters } from "components/Filters"
+import { FilterButton } from "components/FilterButton"
 
 describe("<Filters />", () => {
   it("shows 3 input elements", () => {

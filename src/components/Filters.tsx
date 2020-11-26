@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { FilterButton } from "./FilterButton"
+import { FilterButton } from "components/FilterButton"
 
 interface Props {
   onSearch: (
