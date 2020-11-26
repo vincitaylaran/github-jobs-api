@@ -18,9 +18,6 @@ export const Home = () => {
     >
       <h1>GitHub Jobs</h1>
       <Filters onSearch={findJobs} />
-      <LoadButton onClick={loadMore} isLoading={isLoading}>
-        Load more
-      </LoadButton>
       <h2>Showing "{jobs && jobs.length}" jobs</h2>
       <Jobs>
         {isLoading ? (
