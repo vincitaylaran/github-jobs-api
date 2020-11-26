@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { FilterButton } from "./FilterButton"
 
 interface Props {
   onSearch: (
@@ -49,7 +50,7 @@ export const Filters: React.FC<Props> = ({ onSearch }) => {
         onClick={() => setIsFullTimeOnly(isFullTimeOnly ? false : true)}
       />
       <br />
-      <button>Search</button>
+      <FilterButton />
     </form>
   )
 }
