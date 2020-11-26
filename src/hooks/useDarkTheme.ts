@@ -1,13 +1,11 @@
 import { createContext, useState } from "react"
 
-export const ThemeContext = createContext("light")
-
 export function useDarkTheme() {
   const [theme, setTheme] = useState("light")
 
-  const switchTheme = () => {
+  const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light")
   }
 
-  return { theme, switchTheme }
+  return { theme, toggleTheme }
 }

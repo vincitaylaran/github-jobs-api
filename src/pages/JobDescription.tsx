@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useCallback } from "react"
 import parse from "html-react-parser"
-import { ThemeContext } from "../hooks/useDarkTheme"
+import { ThemeContext } from "../App"
 import { useGithubJobsApi } from "../hooks/useGithubJobsApi"
 import { useParams } from "react-router-dom"
 
@@ -36,8 +36,6 @@ export const JobDescription: React.FC = () => {
       ) : (
         <div>Loading...</div>
       )}
-      {/* <h1>{job ? job.company : "Loading..."}</h1>
-      <div>{job ? parse(job.description) : "Loading..."}</div> */}
     </div>
   )
 }

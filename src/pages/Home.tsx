@@ -3,7 +3,7 @@ import { Filters } from "../components/Filters"
 import { LoadButton } from "../components/LoadButton"
 import { Jobs } from "../components/Jobs"
 import { Job, Props as IJob } from "../components/Job"
-import { ThemeContext } from "../hooks/useDarkTheme"
+import { ThemeContext } from "../App"
 import { useGithubJobsApi } from "../hooks/useGithubJobsApi"
 
 export const Home = () => {

@@ -78,6 +78,7 @@ export function useGithubJobsApi() {
       })
   }
 
+  // TODO: create an endpoint that is mutable to include queries.
   const loadMore = () => {
     if (jobs.length >= 50) {
       const nextPage = page + 1
