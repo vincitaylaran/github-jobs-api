@@ -1,18 +1,19 @@
-import React, { useEffect, useContext, useCallback } from "react"
+import React, { useEffect, useCallback } from "react"
 import parse from "html-react-parser"
-import { ThemeContext } from "App"
 import { useGithubJobsApi } from "hooks/useGithubJobsApi"
 import { useParams } from "react-router-dom"
+
+interface Props {
+  theme?: string
+}
 
 interface Params {
   id: string
 }
 
-export const JobDescription: React.FC = () => {
-  const theme = useContext(ThemeContext)
+export const JobDescription: React.FC<Props> = ({ theme }) => {
   const params = useParams<Params>()
   const { findJob, job, isLoading } = useGithubJobsApi()
-  console.log("JobDescription:React.FC -> theme", theme)
 
   const memoizedCallback = useCallback(() => {
     findJob(params.id)

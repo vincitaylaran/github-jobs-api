@@ -1,15 +1,16 @@
-import React, { useContext } from "react"
+import React from "react"
 import { Filters } from "components/Filters"
 import { LoadButton } from "components/LoadButton"
 import { Jobs } from "components/Jobs"
 import { Job, Props as IJob } from "components/Job"
-import { ThemeContext } from "App"
 import { useGithubJobsApi } from "hooks/useGithubJobsApi"
 
-export const Home = () => {
-  const theme = useContext(ThemeContext)
+interface Props {
+  theme?: string
+}
+
+export const Home: React.FC<Props> = ({ theme }) => {
   const { findJobs, loadMore, isLoading, jobs } = useGithubJobsApi()
-  console.log("theme", theme)
 
   return (
     <div
@@ -23,7 +24,7 @@ export const Home = () => {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          jobs.map((job: IJob) => <Job {...job} />)
+          jobs.map((job: IJob) => <Job key={job.id} {...job} />)
         )}
       </Jobs>
       <LoadButton onClick={loadMore} isLoading={isLoading}>

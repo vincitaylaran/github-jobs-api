@@ -34,8 +34,6 @@ export function useGithubJobsApi() {
   }
 
   const fetchData = (pageNumber?: number) => {
-    console.log("fetching data...")
-
     let endpointCopy = endpoint
 
     if (pageNumber) setPage(pageNumber)
@@ -49,7 +47,6 @@ export function useGithubJobsApi() {
       .then((res) => {
         setJobs(res)
         setIsLoading(false)
-        console.log("data fetched!")
 
         return res
       })
