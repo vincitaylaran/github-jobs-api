@@ -1,12 +1,12 @@
 import React from "react"
-import { shallow } from "enzyme"
+import { shallow, ShallowWrapper } from "enzyme"
 
 import { Home } from "pages/Home"
 import { Jobs } from "components/Jobs"
 import { Filters } from "components/Filters"
 import { LoadButton } from "components/LoadButton"
 
-let component: any
+let component: ShallowWrapper
 
 beforeEach(() => {
   component = shallow(<Home />)
