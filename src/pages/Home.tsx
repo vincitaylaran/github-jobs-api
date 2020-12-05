@@ -14,8 +14,8 @@ export const Home: React.FC<Props> = ({ theme }) => {
 
   return (
     <div
-      className="App"
-      style={{ backgroundColor: theme === "dark" ? "#121721" : "#ffffff" }}
+      className="App day"
+      // style={{ backgroundColor: theme === "dark" ? "#121721" : "#ffffff" }}
     >
       <h1>GitHub Jobs</h1>
       <Filters onSearch={findJobs} />

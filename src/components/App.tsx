@@ -1,5 +1,4 @@
-import React from "react"
-import "styles/App.css"
+import React, { useEffect } from "react"
 import { Home } from "pages/Home"
 import { JobDescription } from "pages/JobDescription"
 
@@ -11,6 +10,11 @@ import { ThemeButton } from "components/ThemeButton"
 
 export default function App() {
   const { theme, toggleTheme } = useDarkTheme()
+
+  useEffect(() => {
+    localStorage.setItem("theme", "dark")
+    return () => localStorage.removeItem("theme")
+  })
 
   return (
     <Router>
