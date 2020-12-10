@@ -4,6 +4,7 @@ import { LoadButton } from "components/LoadButton"
 import { Jobs } from "components/Jobs"
 import { Job, Props as IJob } from "components/Job"
 import { useGithubJobsApi } from "hooks/useGithubJobsApi"
+import { sampleData } from "sample-data"
 
 interface Props {
   theme?: string
