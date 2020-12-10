@@ -1,5 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router-dom"
+import "styles/Job.scss"
 
 export interface Props {
   company: string
@@ -16,20 +17,25 @@ export interface Props {
 }
 
 export const Job: React.FC<Props> = ({ ...job }) => {
-  const { id, company, type, location } = job
+  const { id, company, type, location, created_at, title } = job
   const history = useHistory()
 
   return (
-    <p
+    <div
       key={id}
-      style={{ border: "1px solid", cursor: "pointer" }}
+      className="job"
       onClick={() => {
         history.push(`/job/${id}`)
       }}
     >
-      {company} <br />
-      type: {type} <br />
-      location: {location}
-    </p>
+      <div>IMAGE HERE</div>
+      <div style={{ backgroundColor: "violet" }}>
+        <span>{created_at}</span>
+        <span>{type}</span>
+      </div>
+      <div style={{ backgroundColor: "brown" }}>{title}</div>
+      <div style={{ backgroundColor: "orange" }}>{company}</div>
+      <div style={{ backgroundColor: "salmon" }}>{location}</div>
+    </div>
   )
 }
