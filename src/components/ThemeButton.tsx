@@ -1,19 +1,17 @@
 import React from "react"
+import { connect } from "react-redux"
+import * as actions from "actions"
 
-interface Props {
-  onClick: () => void
-}
+// interface Props {
+//   onClick: () => void
+// }
 
-export const ThemeButton: React.FC<Props> = ({ onClick }) => {
+const ThemeButton: React.FC = (props) => {
   return (
     <div>
-      <button
-        onClick={() => {
-          onClick()
-        }}
-      >
-        change theme
-      </button>
+      <button onClick={() => actions.changeTheme("dark")}>change theme</button>
     </div>
   )
 }
+
+export default connect(null, actions)(ThemeButton)
