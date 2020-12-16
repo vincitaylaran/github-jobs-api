@@ -1,10 +1,10 @@
 import * as actions from "actions/types"
 
-export const changeTheme = (theme: "light" | "dark") => {
+export const toggleTheme = () => {
   return {
-    type: actions.CHANGED_THEME,
+    type: actions.TOGGLED_THEME,
     payload: {
-      theme,
+      isToggled: true,
     },
   }
 }
