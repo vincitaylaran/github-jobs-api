@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { FilterButton } from "components/FilterButton"
+import SearchButton from "components/Button"
+import { TextArea } from "components/TextArea"
 
 interface Props {
   onSearch: (
@@ -17,8 +18,8 @@ interface Query {
 }
 
 export const Filters: React.FC<Props> = ({ onSearch }) => {
-  const [description, setDescription] = useState<string>()
-  const [location, setLocation] = useState<string>()
+  const [description, setDescription] = useState<string>("")
+  const [location, setLocation] = useState<string>("")
   const [isFullTimeOnly, setIsFullTimeOnly] = useState<boolean>()
 
   const handleSubmit = (e: any) => {
@@ -27,15 +28,19 @@ export const Filters: React.FC<Props> = ({ onSearch }) => {
   }
 
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form className="filter-form" action="" onSubmit={handleSubmit}>
+      <TextArea />
       <input
+        id="job-title"
         type="text"
         placeholder="Filter by title, companies, expertise..."
         style={{ width: 250 }}
+        value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <br />
       <input
+        id="job-location"
         type="text"
         placeholder="Filter by location..."
         style={{ width: 250 }}
@@ -45,12 +50,15 @@ export const Filters: React.FC<Props> = ({ onSearch }) => {
       <br />
       Full Time Only
       <input
+        id="job-is-full-time-only"
         type="checkbox"
         checked={isFullTimeOnly}
         onClick={() => setIsFullTimeOnly(isFullTimeOnly ? false : true)}
       />
       <br />
-      <FilterButton />
+      <SearchButton onClick={() => console.log("search clicked")}>
+        Search
+      </SearchButton>
     </form>
   )
 }
