@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import { useDarkTheme } from "hooks/useDarkTheme"
 
-import { ThemeButton } from "components/ThemeButton"
+import ThemeButton from "components/ThemeButton"
 import "styles/App.scss"
 
 export default function App() {
-  const { theme, toggleTheme } = useDarkTheme()
+  // const { theme, toggleTheme } = useDarkTheme()
 
   useEffect(() => {
     localStorage.setItem("theme", "dark")
@@ -18,18 +18,16 @@ export default function App() {
   })
 
   return (
-    <div className="app">
-      <Router>
-        <ThemeButton onClick={toggleTheme} />
-        <Switch>
-          <Route exact path="/">
-            <Home theme={theme} />
-          </Route>
-          <Route exact path="/job/:id">
-            <JobDescription theme={theme} />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <ThemeButton />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/job/:id">
+          <JobDescription />
+        </Route>
+      </Switch>
+    </Router>
   )
 }

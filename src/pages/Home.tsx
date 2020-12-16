@@ -1,6 +1,6 @@
 import React from "react"
 import { Filters } from "components/Filters"
-import { LoadButton } from "components/LoadButton"
+import LoadButton from "components/Button"
 import { Jobs } from "components/Jobs"
 import { Job, Props as IJob } from "components/Job"
 import { useGithubJobsApi } from "hooks/useGithubJobsApi"
@@ -11,7 +11,8 @@ interface Props {
 }
 
 export const Home: React.FC<Props> = ({ theme }) => {
-  const { findJobs, loadMore, isLoading, jobs } = useGithubJobsApi()
+  const { findJobs, loadMore, isLoading } = useGithubJobsApi()
+  const jobs = sampleData
 
   return (
     <div
@@ -28,9 +29,7 @@ export const Home: React.FC<Props> = ({ theme }) => {
           jobs.map((job: IJob) => <Job key={job.id} {...job} />)
         )}
       </Jobs>
-      <LoadButton onClick={loadMore} isLoading={isLoading}>
-        Load more
-      </LoadButton>
+      <LoadButton onClick={loadMore}>Load more</LoadButton>
     </div>
   )
 }

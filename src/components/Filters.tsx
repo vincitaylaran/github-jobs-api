@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import SearchButton from "components/Button"
-import { TextArea } from "components/TextArea"
 
 interface Props {
   onSearch: (
@@ -29,7 +28,6 @@ export const Filters: React.FC<Props> = ({ onSearch }) => {
 
   return (
     <form className="filter-form" action="" onSubmit={handleSubmit}>
-      <TextArea />
       <input
         id="job-title"
         type="text"

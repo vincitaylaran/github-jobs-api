@@ -2,14 +2,20 @@ import React from "react"
 import { connect } from "react-redux"
 import * as actions from "actions"
 
-// interface Props {
-//   onClick: () => void
-// }
+interface Props {
+  toggleTheme: () => object
+}
 
-const ThemeButton: React.FC = (props) => {
+const ThemeButton: React.FC<Props> = ({ toggleTheme }) => {
   return (
     <div>
-      <button onClick={() => actions.changeTheme("dark")}>change theme</button>
+      <button
+        onClick={() => {
+          console.log(toggleTheme())
+        }}
+      >
+        change theme
+      </button>
     </div>
   )
 }
