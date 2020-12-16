@@ -2,20 +2,14 @@ import * as actions from "actions/types"
 
 interface Action {
   type: string
-  payload: Payload
+  payload: boolean
 }
-
-interface Payload {
-  theme: Theme
-}
-
-type Theme = "light" | "dark"
 
 const themeButtonReducer = (state = { theme: "light" }, action: Action) => {
   switch (action.type) {
-    case actions.CHANGED_THEME:
+    case actions.TOGGLED_THEME:
       return {
-        theme: action.payload.theme,
+        theme: state.theme === "light" ? "dark" : "light",
       }
     default:
       return state
