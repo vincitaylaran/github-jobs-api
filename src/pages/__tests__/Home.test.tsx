@@ -4,7 +4,7 @@ import { shallow, ShallowWrapper } from "enzyme"
 import { Home } from "pages/Home"
 import { Jobs } from "components/Jobs"
 import { Filters } from "components/Filters"
-import { Button } from "components/Button"
+import LoadButton from "components/Button"
 
 let component: ShallowWrapper
 
@@ -21,5 +21,5 @@ it("shows Jobs", () => {
 })
 
 it("shows Load Button", () => {
-  expect(component.find(Button).length).toEqual(1)
+  expect(component.find(LoadButton).length).toEqual(1)
 })

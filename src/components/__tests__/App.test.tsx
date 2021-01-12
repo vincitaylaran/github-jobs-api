@@ -1,6 +1,6 @@
 import React from "react"
 import App from "components/App"
-import { ThemeButton } from "components/ThemeButton"
+import ThemeButton from "components/ThemeButton"
 import { shallow, ShallowWrapper } from "enzyme"
 
 let component: ShallowWrapper

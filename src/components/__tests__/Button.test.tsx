@@ -14,7 +14,7 @@ describe("the button", () => {
   })
 })
 
-describe("the load button", () => {
+describe("the Load Button", () => {
   let component: ReactWrapper
 
   beforeEach(() => {
@@ -23,6 +23,15 @@ describe("the load button", () => {
 
   afterEach(() => {
     component.unmount()
+  })
+
+  it("should disable on click", () => {
+    /**
+     * find the button
+     * simulate a click event
+     * expect the "disabled" attribute to be true
+     */
+    // TODO: create a test that checks if the button is disabled on click
   })
 
   // TODO: write a test which uses a mock API call
