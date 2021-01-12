@@ -1,0 +1,220 @@
+$desktop-breakpoint: 1400px;
+$tablet-breakpoint: 1024px;
+$mobile-breakpoint: 430px;
+
+.filters {
+  @media all and (max-width: $desktop-breakpoint) {
+    width: 1110px;
+  }
+
+  @media all and (max-width: $tablet-breakpoint) {
+    width: 689px;
+  }
+
+  @media all and (max-width: $mobile-breakpoint) {
+    width: 327px;
+  }
+
+  background-color: white;
+  display: flex;
+  height: 80px;
+  border-radius: 6px;
+  justify-content: space-between;
+
+  .filterContainer {
+    display: flex;
+    border: 1px solid rgba(110, 128, 152, 0.2);
+
+    input.filterByTitle,
+    input.filterByLocation {
+      margin-left: 10px;
+      outline: none;
+      border: none;
+    }
+
+    .icon {
+      padding-top: 10px;
+    }
+
+    @media all and (min-width: $mobile-breakpoint) {
+      #filter.icon {
+        display: none;
+      }
+    }
+  }
+
+  #jobTitle,
+  #jobLocation {
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      width: 60%;
+      font-size: 16px;
+    }
+
+    #search.icon,
+    #location.icon {
+      padding-bottom: 10px;
+    }
+
+    @media all and (min-width: $desktop-breakpoint) {
+      justify-content: flex-start;
+      box-sizing: border-box;
+      padding-left: 30px;
+
+      input {
+        width: 80%;
+      }
+    }
+  }
+
+  #jobTitle {
+    @media all and (min-width: $desktop-breakpoint) {
+      width: 40%;
+    }
+
+    @media all and (max-width: $mobile-breakpoint) {
+      border: none;
+
+      svg#search.icon {
+        display: none;
+      }
+
+      input.filterByTitle {
+        margin: 0;
+        width: 75%;
+      }
+    }
+  }
+
+  #jobLocation {
+    @media all and (min-width: $desktop-breakpoint) {
+      width: 29%;
+    }
+    @media all and (max-width: $mobile-breakpoint) {
+      display: none;
+    }
+  }
+
+  #jobSearch {
+    @media all and (min-width: $desktop-breakpoint) {
+      width: 31%;
+
+      #searchButton {
+        width: 123px;
+      }
+
+      div.checkboxContainer {
+        width: 50%;
+      }
+    }
+
+    width: 40%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 7px;
+    box-sizing: border-box;
+
+    #filter.icon {
+      position: relative;
+      bottom: 8%;
+    }
+
+    div.checkboxContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding-left: 9px;
+
+      .checkboxCustom {
+        width: 24px;
+        height: 24px;
+        background-color: #eee;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #ccc;
+        }
+      }
+
+      span.bgColorChecked {
+        background-color: #2196f3;
+      }
+
+      input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        opacity: 1;
+        cursor: pointer;
+      }
+
+      input[type="checkbox"]:checked {
+        opacity: 1;
+      }
+
+      label {
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 10px;
+        padding-bottom: 10px;
+      }
+
+      @media all and (max-width: $mobile-breakpoint) {
+        display: none;
+      }
+
+      @media all and (min-width: $desktop-breakpoint) {
+        label {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  #searchButton {
+    height: 48px;
+    width: 80px;
+    font-size: 16px;
+    font-weight: 700;
+
+    svg#search.icon {
+      display: none;
+    }
+  }
+
+  /****** MEDIA QUERIES ******/
+  @media all and (max-width: $mobile-breakpoint) {
+    #searchButton {
+      width: 48px;
+
+      label.fullTimeTxt {
+        display: none;
+      }
+
+      svg#search.icon {
+        display: inline;
+        position: relative;
+        bottom: 8%;
+      }
+    }
+  }
+}
+
+button {
+  background-color: #5964e0;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

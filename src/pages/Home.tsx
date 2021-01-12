@@ -20,7 +20,7 @@ export const Home: React.FC<Props> = ({ theme }) => {
       // style={{ backgroundColor: theme === "dark" ? "#121721" : "#ffffff" }}
     >
       <h1>GitHub Jobs</h1>
-      <Filters onSearch={findJobs} />
+      <Filters />
       <h2>Showing "{jobs && jobs.length}" jobs</h2>
       <Jobs>
         {isLoading ? (
